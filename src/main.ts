@@ -1,12 +1,13 @@
-import express from 'express';
+import http from 'node:http';
+import createDebug from 'debug';
+import { app } from './app.js';
 
-const app = express();
+const debug = createDebug('app:main');
+debug('Iniciando servidor');
+
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+const server = http.createServer(app);
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+server.listen(port);
+debug(`Server is listening on http://localhost:${port}`);
